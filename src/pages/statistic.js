@@ -21,11 +21,11 @@ import PlayersList from  '../components/players-list'
 
 var canadaIcon = require('../img/canada-flag.png');
 var seedIcon = require('../img/pool-seeding-pic.png');
-var backIcon = require('../img/btn-back-top2.png');
+var backIcon = require('../img/btn-back-top.png');
 var poolIcon = require('../img/btn-pool-results.png');
 const DEMO_OPTIONS = ['Pool #1 on STRIP A1', 'Pool #2 on STRIP A1', 'Pool #3 on STRIP A1'];
 
-import Button from '../components/button'
+
 
 export default class Statistic extends Component {
   constructor(props) {
@@ -75,12 +75,19 @@ export default class Statistic extends Component {
     return (
       <View style={{flex: 1, backgroundColor: '#2c3239'}}>
 
+        <View style={styles.topBarContainer}>
+          <TopBar
+            onBackPress={this._onBackPress.bind(this)}
+            title='FENCER RESULTS'
+          />
+        </View>
+
         <ModalDropdown style={styles.dropdown_2}
                        textStyle={styles.dropdown_2_text}
                        dropdownStyle={styles.dropdown_2_dropdown}
                        options={DEMO_OPTIONS}
-                       //renderRow={this._dropdown_2_renderRow.bind(this)}
-                      // renderSeparator={(sectionID, rowID, adjacentRowHighlighted) => this._dropdown_2_renderSeparator(sectionID, rowID, adjacentRowHighlighted)}
+                       renderRow={this._dropdown_2_renderRow.bind(this)}
+                       renderSeparator={(sectionID, rowID, adjacentRowHighlighted) => this._dropdown_2_renderSeparator(sectionID, rowID, adjacentRowHighlighted)}
         />
       </View>
     );

@@ -8,9 +8,9 @@ import {
 
 import ImageButton from './imageButton';
 
-var backIcon = require('../img/btn-back2.png');
-var listIcon = require('../img/btn-list2.png');
-var searchIcon = require('../img/btn-search2.png');
+var backIcon = require('../img/btn-back.png');
+var listIcon = require('../img/btn-list.png');
+var searchIcon = require('../img/btn-search.png');
 
 export default class TopBar extends Component {
   constructor(props) {

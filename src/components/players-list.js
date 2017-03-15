@@ -17,7 +17,7 @@ import TopBar from  '../components/topBar'
 
 var canadaIcon = require('../img/canada-flag.png');
 var seedIcon = require('../img/pool-seeding-pic.png');
-var backIcon = require('../img/btn-back-top2.png');
+var backIcon = require('../img/btn-back-top.png');
 
 export default class PlayersList extends Component {
   constructor(props) {

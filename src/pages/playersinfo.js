@@ -23,7 +23,7 @@ import PlayersList from  '../components/players-list'
 
 var canadaIcon = require('../img/canada-flag.png');
 var seedIcon = require('../img/pool-seeding-pic.png');
-var backIcon = require('../img/btn-back-top2.png');
+var backIcon = require('../img/btn-back-top.png');
 var poolIcon = require('../img/btn-pool-results.png');
 
 import Button from '../components/button'
