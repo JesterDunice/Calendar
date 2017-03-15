@@ -9,7 +9,7 @@ import {
 
 import Login from './pages/login';
 import Starting from './pages/starting';
-import Schedule from './pages/schedule';
+import PlayersInfo from './pages/playersinfo';
 //import Chat from './pages/chat';
 
 //import {APP_ID} from './consts'
@@ -21,7 +21,7 @@ import Schedule from './pages/schedule';
 var ROUTES = {
   login: Login,
   starting: Starting,
-  schedule: Schedule
+  playersinfo: PlayersInfo
  // chat: Chat
 };
 

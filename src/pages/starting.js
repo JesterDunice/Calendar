@@ -27,14 +27,9 @@ export default class Starting extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
       buttonDisabled: false,
-      connection: props.route.connection || false,
-      buttonPressed: '0'
     };
     this._onPressLogin = this._onPressLogin.bind(this);
-    // this._onShowUnderlay = this._onShowUnderlay.bind(this);
-    this._onHideUnderlay = this._onHideUnderlay.bind(this);
   }
 
 
@@ -42,22 +37,8 @@ export default class Starting extends Component {
     this.props.navigator.push({name: 'login'});
   }
 
-  _onPressSchedule() {
-    this.props.navigator.push({name: 'schedule'});
-  }
-
-  _onShowUnderlay(id){
-    var self = this;
-
-    return ()=>{
-      self.setState({buttonPressed: id});
-    }
-    // console.warn('---->',this)
-    // id === '1' ? this.setState({buttonPressed: '1'}) : id === '2' ? this.setState({buttonPressed: '2'}) : this.setState({buttonPressed: '3'});
-  }
-
-  _onHideUnderlay(){
-    this.setState({buttonPressed: '0'});
+  _onPressPlayersInfo() {
+    this.props.navigator.push({name: 'playersinfo'});
   }
 
   _buttonStyle() {
@@ -78,6 +59,7 @@ export default class Starting extends Component {
       <LoginView style={styles.container} >
         <StatusBar
           backgroundColor="#5E8D48"
+          statusBarColor="#5E8D48"
           barStyle="light-content"
         />
         <View style={{flex: 1}}>
@@ -101,9 +83,9 @@ export default class Starting extends Component {
                                 disabled={this.state.buttonDisabled}
                                 style={this._buttonStyle()}
                                 underlayColor={'#0C3A50'}
-                                onPress={this._onPressSchedule.bind(this)}
+                                onPress={this._onPressPlayersInfo.bind(this)}
             >
-              <Text style={styles.buttonText}>Schedule screen</Text>
+              <Text style={styles.buttonText}>Players Info screen</Text>
             </TouchableHighlight>
 
             <TouchableHighlight id="3"

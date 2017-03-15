@@ -121,8 +121,14 @@ export default class Login extends Component {
 
 
           <View style={styles.bottomContainer}>
+
             <Text style={styles.authorizeText}>Not have an accounts in social networks?</Text>
-            <Text style={styles.authorizeBoldText}>Login without authorization</Text>
+
+            <TouchableHighlight onPress={this._onPressWinMob}
+                                underlayColor={'#242A34'}
+            >
+              <Text style={styles.authorizeBoldText}>Login without authorization</Text>
+            </TouchableHighlight>
           </View>
 
 
