@@ -14,6 +14,7 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   TouchableHighlight,
+  ListView,
   Image
 } from 'react-native'
 
@@ -23,17 +24,19 @@ import PlayersList from  '../components/players-list'
 var canadaIcon = require('../img/canada-flag.png');
 var seedIcon = require('../img/pool-seeding-pic.png');
 var backIcon = require('../img/btn-back-top2.png');
+var poolIcon = require('../img/btn-pool-results.png');
 
 import Button from '../components/button'
 
 export default class PlayersInfo extends Component {
   constructor(props) {
     super(props);
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    var Component = <PlayersList/>
     this.state = {
-      username: '',
-      buttonDisabled: false,
-      connection: props.route.connection || false,
-      buttonPressed: '0'
+      dataSource: ds.cloneWithRows([
+        Component, Component, Component, Component, Component, Component, Component, Component, Component
+      ])
     };
   }
 
@@ -90,7 +93,7 @@ export default class PlayersInfo extends Component {
             </View>
           </View>
 
-          <View style={{flex: 1, backgroundColor: '#11225c'}}>
+          <View style={{flex: 1, backgroundColor: '#2c3239'}}>
 
 
               <View
@@ -100,8 +103,8 @@ export default class PlayersInfo extends Component {
                                           alignItems: 'center',
                                           backgroundColor: '#2c3239',
                                           borderColor: '#2c3239',
-                                          borderTopLeftRadius: 3,
-                                          borderTopRightRadius: 3,
+                                          borderTopLeftRadius: 5,
+                                          borderTopRightRadius: 5,
                                           height: 25,
                                           width: 30,
 
@@ -115,15 +118,42 @@ export default class PlayersInfo extends Component {
 
             <View style={{flex: 1,backgroundColor: '#2c3239',flexDirection: 'column'}}>
 
+              <ListView
+                dataSource={this.state.dataSource}
+                renderRow={(data) => <View>{data}</View>}
+              />
 
-              <PlayersList/>
-              <PlayersList/>
-              <PlayersList/>
-              <PlayersList/>
-              <PlayersList/>
+              <View style={{flex: 1,
+                            justifyContent: 'flex-end',
+                            alignItems: 'flex-end',
+                            //backgroundColor: '#da0'
+                            }}>
+                <TouchableHighlight style={{justifyContent: 'center',
+                                          alignItems: 'center',
+                                          backgroundColor: '#282e37',
+                                          borderColor: '#282e37',
+                                          borderRadius: 5,
+                                          height: 40,
+                                          width: 55,
+                                          marginRight: 5,
+                                          marginBottom: 10
+
+              }}
+                                    onPress={this._onBackPress.bind(this)}
+                >
+                  <View style={{
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                }}>
+                    <Image style={{width: 24, height: 23}} source={poolIcon}/>
+                    <Text style={{fontSize: 8, color: '#fff'}}>Pool Results</Text>
+                  </View>
+                </TouchableHighlight>
+              </View>
 
 
             </View>
+
 
           </View>
 

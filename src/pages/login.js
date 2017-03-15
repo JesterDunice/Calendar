@@ -29,8 +29,7 @@ export default class Login extends Component {
   }
 
   _onPressWinMob(){
-    this.props.navigator.pop();
-
+    this.props.navigator.pop()
   }
 
   _onPressConnect(){
@@ -108,7 +107,7 @@ export default class Login extends Component {
               disabled={this.state.buttonDisabled}
               style={this.state.buttonPressed === '3' ? this._buttonPressedStyle('3') : this._buttonStyle()}
               underlayColor={'#00adef'}
-              onPress={this._onPressWinMob}
+              onPress={this._onPressConnect}
               onShowUnderlay={this._onShowUnderlay.bind(this, '3')}
               onHideUnderlay={this._onHideUnderlay}
             >

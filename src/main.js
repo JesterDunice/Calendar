@@ -10,18 +10,16 @@ import {
 import Login from './pages/login';
 import Starting from './pages/starting';
 import PlayersInfo from './pages/playersinfo';
-//import Chat from './pages/chat';
-
-//import {APP_ID} from './consts'
-//import SendBird from 'sendbird'
-//var sb = null;
-
+import Statistic from './pages/statistic';
+//import Demo from './pages/drdown';
 
 
 var ROUTES = {
   login: Login,
   starting: Starting,
-  playersinfo: PlayersInfo
+  playersinfo: PlayersInfo,
+  statistic: Statistic
+  //demo: Demo
  // chat: Chat
 };
 

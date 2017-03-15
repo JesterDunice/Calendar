@@ -32,6 +32,12 @@ export default class PlayersList extends Component {
     };
   }
 
+  _getNumber(){
+    let max = 15;
+    let min = 0;
+     return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
   render(){
     return(
       <View
@@ -54,7 +60,7 @@ export default class PlayersList extends Component {
 
         <View style={styles.rightPartContainer}>
           <View style={styles.scoreContainer}>
-            <Text style={styles.scoreText}>{this.state.counterVictory}-{this.state.couterDefeat}</Text>
+            <Text style={styles.scoreText}>{this._getNumber()}-{this._getNumber()}</Text>
           </View>
         </View>
 
@@ -104,7 +110,7 @@ const styles = StyleSheet.create({
   },
   infoText:{
     paddingLeft: 5,
-    fontSize: 12,
+    fontSize: 13,
     color: '#515961'
   },
   rightPartContainer:{
@@ -113,9 +119,9 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start'
   },
   scoreContainer:{
-    width: 50,
-    height: 40,
-    backgroundColor: '#242a34',
+    width: 58,
+    height: 42,
+    backgroundColor: '#282e37',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5

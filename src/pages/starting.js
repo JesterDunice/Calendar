@@ -37,6 +37,10 @@ export default class Starting extends Component {
     this.props.navigator.push({name: 'login'});
   }
 
+  _onPressStatistic() {
+    this.props.navigator.push({name: 'statistic'});
+  }
+
   _onPressPlayersInfo() {
     this.props.navigator.push({name: 'playersinfo'});
   }
@@ -92,10 +96,10 @@ export default class Starting extends Component {
                                 disabled={this.state.buttonDisabled}
                                 style={this._buttonStyle()}
                                 underlayColor={'#0C3A50'}
-                                onPress={this._onPressLogin}
+                                onPress={this._onPressStatistic.bind(this)}
 
             >
-              <Text style={styles.buttonText}>Statistics screen</Text>
+              <Text style={styles.buttonText}>Statistic screen</Text>
             </TouchableHighlight>
           </View>
 
