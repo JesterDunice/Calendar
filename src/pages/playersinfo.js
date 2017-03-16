@@ -52,6 +52,7 @@ export default class PlayersInfo extends Component {
           <View style={styles.topBarContainer}>
             <TopBar
               onBackPress={this._onBackPress.bind(this)}
+              TextLabel={true}
               title='FENCER RESULTS'
             />
           </View>
