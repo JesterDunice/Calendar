@@ -52,7 +52,7 @@ export default class PlayersInfo extends Component {
           <View style={styles.topBarContainer}>
             <TopBar
               onBackPress={this._onBackPress.bind(this)}
-              TextLabel={true}
+              textLabel={true}
               title='FENCER RESULTS'
             />
           </View>
@@ -150,6 +150,7 @@ export default class PlayersInfo extends Component {
                     <Text style={{fontSize: 8, color: '#fff'}}>Pool Results</Text>
                   </View>
                 </TouchableHighlight>
+
               </View>
 
 

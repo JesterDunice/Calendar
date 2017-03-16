@@ -51,10 +51,10 @@ export default class TopBar extends Component {
     />);
   }
   _RenderLabel(){
-   if (this.props.TextLabel) {
+   if (this.props.textLabel) {
       return (
         <Text style={styles.titleLabel}>{this.props.title}</Text>
-      )
+      );
     } else if (this.props.dropList) {
      return (
        <ModalDropdown style={styles.dropdown}
@@ -66,7 +66,7 @@ export default class TopBar extends Component {
                       renderRow={this._dropdown_renderRow.bind(this)}
                       renderSeparator={(sectionID, rowID, adjacentRowHighlighted) => this._dropdown_renderSeparator(sectionID, rowID, adjacentRowHighlighted)}
        />
-     )
+     );
    }
   }
 
