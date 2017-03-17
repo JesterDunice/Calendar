@@ -15,72 +15,126 @@ import {
   Image
 } from 'react-native'
 
-import TopBar from  '../components/topBar'
-import GamesTable from  '../components/gamesTable'
+import TopBar from  '../components/topBar';
+import GamesTable from  '../components/gamesTable';
+import {DUEL_LIST, TEST21} from  '../consts';
 
-
-
-//var backIcon = require('../img/btn-back-top.png');
 
 const DEMO_OPTIONS = ['Pool #1 on STRIP A1 trhrthrthrthrthrth', 'Pool #2 on STRIP A1', 'Pool #3 on STRIP A1', 'Pool #4 on STRIP A1', 'Pool #5 on STRIP A1',
   'Pool #6 on STRIP A1','Pool #7 on STRIP A1','Pool #8 on STRIP A1','Pool #9 on STRIP A1',
   'Pool #10 on STRIP A1','Pool #11 on STRIP A1','Pool #12 on STRIP A1','Pool #13 on STRIP A1',
   'Pool #14 on STRIP A1','Pool #15 on STRIP A1','Pool #16 on STRIP A1','Pool #17 on STRIP A1'];
-var b = 0;
-
 
 
 export default class Statistic extends Component {
   constructor(props) {
     super(props);
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    var Component = <GamesTable />;
-    //const Component2 = <View style={{flex: 1, backgroundColor: '#afa'}}><View></View></View>;
+    //const Component0 = <GamesTable flexx={30}/>;
+    //const Component = <GamesTable flexx={100}/>;
 
     this.state = {
-      dataSource: ds.cloneWithRows([
-        Component, Component, Component, Component, Component, Component, Component, Component
-      ]),
-      duel: {
-        fighter1: {
-          name: 'COOKE',
-          surname: 'Dollin',
-          country: 'Canada',
-          club: 'TORONTOFC',
-          class: 'A16',
-          rank: '12',
-          city: 'Toronto',
-          hitsNumber: 5
-        },
-        fighter2: {
-          name: 'KAACI',
-          surname: 'Trollin',
-          country: 'Dania',
-          club: 'Copenhagen Wolves',
-          class: 'A16',
-          rank: '12',
-          city: 'Copenhagen',
-          hitsNumber: 2
+      duel: DUEL_LIST, //this._duelList(),
+      dataSource: ds.cloneWithRows(this._getComponentsNumber()),
 
-        }
-      }
 
     };
+  }
+
+
+  _getNumber(){
+    let max = 4;
+    let min = 0;
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  _onListPress(){
+    console.log(this.state.duel.length)
+  }
+
+  _duelList(){
+    let a = 7;
+    let b = 6;
+    let list = [];
+    for (let i = 0; i < a; i++) {
+      for (let j = 0; j < b; j++) {
+        list.push(
+          {
+            fighter1: {
+              id: i + 1,
+              name: 'COOKE',
+              surname: 'Dollin',
+              country: 'Canada',
+              club: 'TORONTOFC',
+              class: 'A16',
+              rank: '12',
+              city: 'Toronto',
+              hitsNumber: 5
+            },
+            fighter2: {
+              id: j + i + 2,
+              name: 'KAACI',
+              surname: 'Trollin',
+              country: 'Dania',
+              club: 'Copenhagen Wolves',
+              class: 'A16',
+              rank: '12',
+              city: 'Copenhagen',
+              hitsNumber: this._getNumber()
+
+            }
+          }
+        );
+      }
+      b--;
+    }
+    //console.log(JSON.stringify(list));
+    return list;
+  }
+
+  _getUniqueId(arr) {
+    let obj = {};
+
+    for (let i = 0; i < arr.length; i++) {
+      let f1Id = arr[i].fighter1.id;
+      let f2Id = arr[i].fighter2.id;
+      obj[f1Id] = true;
+      obj[f2Id] = true;
+    }
+    console.log(Object.keys(obj).length);
+    return Object.keys(obj).length;
+  }
+
+
+  _getComponentsNumber(){
+    let TableDimensions = this._getUniqueId(DUEL_LIST) + 1;
+
+    let Component0 = <GamesTable height={30} columnNum={TableDimensions }/>;
+    let Component = <GamesTable height={90} columnNum={TableDimensions }/>;
+
+    let Row = TableDimensions - 1;
+    let countRow = 0;
+
+    let list = [];
+    for (let i = 0; i < TableDimensions; i++){
+      if (i == 0){
+        list.push(<GamesTable height={30} columnNum={TableDimensions} col={i}/>)
+      } else {
+        list.push(<GamesTable height={90} columnNum={TableDimensions} col={i} rowNum={countRow}/>);
+        countRow = countRow + (Row - i);
+      }
+    }
+    return list;
+  }
+
+  _onSearchPress(){
+    return this._getUniqueId(this.state.duel);
   }
 
 
   _onBackPress() {
     this.props.navigator.pop();
   }
-
-
-
-  _returnCell() {
-    return (<GamesTable />);
-  }
-
-
-
 
   render() {
     return (
@@ -89,27 +143,29 @@ export default class Statistic extends Component {
         <View style={styles.topBarContainer}>
           <TopBar
             onBackPress={this._onBackPress.bind(this)}
+            onListPress={this._onListPress.bind(this)}
+            onSearchPress={this._onSearchPress.bind(this)}
             dropList={true}
             options={DEMO_OPTIONS}
           />
         </View>
 
-        <View style={{flex: 1, justifyContent: 'center',flexDirection: 'row', }}>
-
-          <ListView
-            style={{flex:1, flexDirection: 'row'}}
-            dataSource={this.state.dataSource}
-            renderRow={(data) => data}
+        <ListView
+          style={{flex: 1, }}
+          dataSource={this.state.dataSource}
+          renderRow={(data) => data}
+        />
+        <View style={styles.topBarContainer}>
+          <TopBar
+            onBackPress={this._onBackPress.bind(this)}
+            onListPress={this._onListPress.bind(this)}
+            onSearchPress={this._onSearchPress.bind(this)}
+            dropList={true}
+            options={DEMO_OPTIONS}
           />
-
         </View>
 
-
-
       </View>
-
-
-
     );
   }
 }

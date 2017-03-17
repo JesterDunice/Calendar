@@ -51,23 +51,23 @@ export default class TopBar extends Component {
     />);
   }
   _RenderLabel(){
-   if (this.props.textLabel) {
+    if (this.props.textLabel) {
       return (
         <Text style={styles.titleLabel}>{this.props.title}</Text>
       );
     } else if (this.props.dropList) {
-     return (
-       <ModalDropdown style={styles.dropdown}
-                      textStyle={styles.dropdown_text}
-                      defaultIndex={0}
-                      defaultValue={this.props.options[0]}
-                      dropdownStyle={styles.dropdown_dropdown}
-                      options={this.props.options}
-                      renderRow={this._dropdown_renderRow.bind(this)}
-                      renderSeparator={(sectionID, rowID, adjacentRowHighlighted) => this._dropdown_renderSeparator(sectionID, rowID, adjacentRowHighlighted)}
-       />
-     );
-   }
+      return (
+        <ModalDropdown style={styles.dropdown}
+                       textStyle={styles.dropdown_text}
+                       defaultIndex={0}
+                       defaultValue={this.props.options[0]}
+                       dropdownStyle={styles.dropdown_dropdown}
+                       options={this.props.options}
+                       renderRow={this._dropdown_renderRow.bind(this)}
+                       renderSeparator={(sectionID, rowID, adjacentRowHighlighted) => this._dropdown_renderSeparator(sectionID, rowID, adjacentRowHighlighted)}
+        />
+      );
+    }
   }
 
   render() {
@@ -85,7 +85,7 @@ export default class TopBar extends Component {
         <View style={styles.leftButton}>
           <ImageButton
             underlayColor={'#2c3239'}
-            onPress={this.props.onBackPress}
+            onPress={this.props.onListPress}
             imageStyle={styles.imageButton}
             image={listIcon}
           />
@@ -98,7 +98,7 @@ export default class TopBar extends Component {
         <View style={styles.rightButton}>
           <ImageButton
             underlayColor={'#2c3239'}
-            onPress={this.props.onBackPress}
+            onPress={this.props.onSearchPress}
             imageStyle={styles.imageButton}
             image={searchIcon}
           />

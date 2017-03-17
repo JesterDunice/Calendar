@@ -58,6 +58,7 @@ export default class Starting extends Component {
     }
   }
 
+
   render() {
     return (
       <LoginView style={styles.container} >

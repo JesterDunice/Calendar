@@ -11,16 +11,12 @@ import Login from './pages/login';
 import Starting from './pages/starting';
 import PlayersInfo from './pages/playersinfo';
 import Statistic from './pages/statistic';
-//import Demo from './pages/drdown';
-
 
 var ROUTES = {
   login: Login,
   starting: Starting,
   playersinfo: PlayersInfo,
   statistic: Statistic
-  //demo: Demo
- // chat: Chat
 };
 
 export default class Main extends Component {
