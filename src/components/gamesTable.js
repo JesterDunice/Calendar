@@ -49,16 +49,14 @@ export default class GamesTable extends Component {
   }
 
   _horizontalNumbers() {
-    let a = this.state.columnNum;
+    let colNum = this.state.columnNum;
     let col = this.state.col;
     let dockod = [];
+    let countColumn = this.state.rowNum;
+    let countRow = col - 2;
 
-    let countRow = this.state.rowNum;
-    let I = this.state.col;
-    let countCol = 0;
-    let rowsize = 21;
+    for (let i = 0; i < colNum; i++) {
 
-    for (let i = 0; i < a; i++) {
       if (col == 0) {
         dockod.push(
           this._returnFirstRow(i)
@@ -69,19 +67,24 @@ export default class GamesTable extends Component {
             this._returnGreyCell()
           );
         } else {
-          if (i < col) {
-            let d = (6 * i + I - (i - 1));
-            console.log(I);
+          if (i == 0){
             dockod.push(
-            this._returnRow(i, col, TEST21[d]));// DUEL_LIST[d].fighter2.hitsNumber));
-            countCol++;
-          }
-          else {
-            dockod.push(
-              this._returnRow(i, col, DUEL_LIST[countRow].fighter1.hitsNumber)
-            );
-            //console.log(DUEL_LIST[countRow].fighter1.hitsNumber);
-            countRow++;
+            this._returnFirstColumn(col));
+
+          } else {
+            if (i < col) {
+
+              dockod.push(
+                this._returnRow(i, col, DUEL_LIST[countRow].fighter2.hitsNumber));
+              countRow += colNum - 2 - i;
+
+            }
+            else {
+              dockod.push(
+                this._returnRow(i, col, DUEL_LIST[countColumn].fighter1.hitsNumber)
+              );
+              countColumn++;
+            }
           }
         }
       }
@@ -100,7 +103,13 @@ export default class GamesTable extends Component {
   _returnFirstRow(i){
     let bGrnd = '#242a34';
     if (i == 0){ i = ''}
-    return(this._renderCell(i, bGrnd));
+    return(this._renderTouchCell(i, bGrnd));
+  }
+
+  _returnFirstColumn(i){
+    let bGrnd = '#242a34';
+    if (i == 0){ i = ''}
+    return(this._renderTouchCell(i, bGrnd));
   }
 
   _returnRow(i, col, txt){
@@ -111,11 +120,29 @@ export default class GamesTable extends Component {
     return(this._renderCell(text, bGrnd));
   }
 
+  _renderTouchCell(text, bgrnd){
+    return(
+      <TouchableHighlight
+        style={{flex: 1,justifyContent: 'center', alignItems: 'center', backgroundColor: bgrnd, margin: 2}}
+        onPress={this.props.onPress}
+        underlayColor={'#323a45'}
+      >
+        <View key={this._getRndColor()}
+              style={{flex: 1,justifyContent: 'center', alignItems: 'center'}}>
+
+          <Text style={{flex: 1,justifyContent: 'center', alignItems: 'center', color: '#fff'}}>{text}</Text>
+        </View>
+      </TouchableHighlight>
+    );
+  }
+
   _renderCell(text, bgrnd){
     return(
-      <View key={this._getRndColor()}
-            style={{flex: 1,justifyContent: 'center', alignItems: 'center', backgroundColor: bgrnd, margin: 2}}>
-        <Text style={{flex: 1,justifyContent: 'center', alignItems: 'center', color: '#fff'}}>{text}</Text>
+
+      <View
+            style={{flex: 1, alignItems: 'center', backgroundColor: bgrnd, margin: 2}}>
+
+          <Text style={{flex: 1,  color: '#fff'}}>{text}</Text>
       </View>
     );
   }

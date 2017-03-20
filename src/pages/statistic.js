@@ -17,8 +17,9 @@ import {
 
 import TopBar from  '../components/topBar';
 import GamesTable from  '../components/gamesTable';
-import {DUEL_LIST, TEST21} from  '../consts';
+import {DUEL_LIST} from  '../consts';
 
+import PlayersList from  '../components/players-list';
 
 const DEMO_OPTIONS = ['Pool #1 on STRIP A1 trhrthrthrthrthrth', 'Pool #2 on STRIP A1', 'Pool #3 on STRIP A1', 'Pool #4 on STRIP A1', 'Pool #5 on STRIP A1',
   'Pool #6 on STRIP A1','Pool #7 on STRIP A1','Pool #8 on STRIP A1','Pool #9 on STRIP A1',
@@ -35,8 +36,8 @@ export default class Statistic extends Component {
 
     this.state = {
       duel: DUEL_LIST, //this._duelList(),
+      playerPicked: 0,
       dataSource: ds.cloneWithRows(this._getComponentsNumber()),
-
 
     };
   }
@@ -49,12 +50,13 @@ export default class Statistic extends Component {
   }
 
   _onListPress(){
-    console.log(this.state.duel.length)
+    //console.log(JSON.stringify(this.state.duel));
+   // console.log(this.state.duel.length)
   }
 
   _duelList(){
     let a = 7;
-    let b = 6;
+    let b = a - 1;
     let list = [];
     for (let i = 0; i < a; i++) {
       for (let j = 0; j < b; j++) {
@@ -88,7 +90,6 @@ export default class Statistic extends Component {
       }
       b--;
     }
-    //console.log(JSON.stringify(list));
     return list;
   }
 
@@ -101,34 +102,43 @@ export default class Statistic extends Component {
       obj[f1Id] = true;
       obj[f2Id] = true;
     }
-    console.log(Object.keys(obj).length);
+    //console.log(Object.keys(obj).length);
     return Object.keys(obj).length;
   }
 
 
-  _getComponentsNumber(){
+  _getComponentsNumber() {
     let TableDimensions = this._getUniqueId(DUEL_LIST) + 1;
-
-    let Component0 = <GamesTable height={30} columnNum={TableDimensions }/>;
-    let Component = <GamesTable height={90} columnNum={TableDimensions }/>;
 
     let Row = TableDimensions - 1;
     let countRow = 0;
 
     let list = [];
-    for (let i = 0; i < TableDimensions; i++){
-      if (i == 0){
-        list.push(<GamesTable height={30} columnNum={TableDimensions} col={i}/>)
+    for (let i = 0; i < TableDimensions; i++) {
+      if (i == 0) {
+        list.push(<GamesTable height={30} columnNum={TableDimensions} col={i}
+                              onPress={this._onTableNumPress.bind(this, i)}/>);
       } else {
-        list.push(<GamesTable height={90} columnNum={TableDimensions} col={i} rowNum={countRow}/>);
+        list.push(<GamesTable height={60} columnNum={TableDimensions} col={i}
+                              onPress={this._onTableNumPress.bind(this, i)} rowNum={countRow}/>);
         countRow = countRow + (Row - i);
       }
     }
     return list;
   }
 
+  _onTableNumPress(i){
+    console.log(i);
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    let self = this;
+    let arr = this._getComponentsNumber();
+    console.log(arr);
+    arr.splice(i, 1, <PlayersList />);
+    self.setState({dataSource: ds.cloneWithRows(arr)})
+  }
+
   _onSearchPress(){
-    return this._getUniqueId(this.state.duel);
+   // return this._getUniqueId(this.state.duel);
   }
 
 
@@ -155,15 +165,7 @@ export default class Statistic extends Component {
           dataSource={this.state.dataSource}
           renderRow={(data) => data}
         />
-        <View style={styles.topBarContainer}>
-          <TopBar
-            onBackPress={this._onBackPress.bind(this)}
-            onListPress={this._onListPress.bind(this)}
-            onSearchPress={this._onSearchPress.bind(this)}
-            dropList={true}
-            options={DEMO_OPTIONS}
-          />
-        </View>
+
 
       </View>
     );
